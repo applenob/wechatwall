@@ -2,10 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+     <link rel="stylesheet" href="ace.min.css">
+     <link rel="stylesheet" href="bootstrap.min.css">
   <title>我的微信墙</title>
   <style>
     li > img{
       width: 32px;
+    }
+    #msg {
+         margin-left:16.667%;
+         margin-top:30px;
+         height:450px;
+    }
+    .well img {
+         width:60px;
+         margin-right:15px;
     }
   </style>
 </head>
@@ -14,175 +25,28 @@
     <!-- -->
   <!--</ul>-->
 
- 
+  <div class="col-sm-8" id="msg">
+       <h3 class="header smaller lighter blue center">微信墙</h3>
+  </div>
   <p id="messages"></p>
 <script type="text/javascript">
-//  var msglist = document.getElementById('messages');
-var qqfaceMap = {"/::)":"0","/::~":"1","/::B":"2","/::|":"3","/:8-)":"4","/::<":"5","/::$":"6","/::X":"7","/::Z":"8","/::'(":"9","/::-|":"10","/::@":"11","/::P":"12","/::D":"13","/::O":"14","/::(":"15","/::+":"16"," /:--b":"17","/::Q":"18","/::T":"19","/:,@P":"20","/:,@-D":"21","/::d":"22","/:,@o":"23","/::g":"24","/:|-)":"25","/::!":"26","/::L":"27","/::>":"28","/::,@":"29","/:,@f":"30","/::-S":"31","/:?":"32","/:,@x":"33","/:,@@":"34","/::8":"35","/:,@!":"36","/:!!!":"37","/:xx":"38","/:bye":"39","/:wipe":"40","/:dig":"41","/:handclap":"42","/:&-(":"43","/:B-)":"44","/:<@":"45","/:@>":"46","/::-O":"47","/:>-|":"48","/:P-(":"49","/::'|":"50","/:X-)":"51","/::*":"52","/:@x":"53","/:8*":"54","/:pd":"55","/:":"56","/:beer":"57","/:basketb":"58","/:oo":"59","/:coffee":"60","/:eat":"61","/:pig":"62","/:rose":"63","/:fade":"64","/:showlove":"65","/:heart":"66","/:break":"67","/:cake":"68","/:li":"69","/:bome":"70","/:kn":"71","/:footb":"72","/:ladybug":"73","/:shit":"74","/:moon":"75","/:sun":"76","/:gift":"77","/:hug":"78","/:strong":"79","/:weak":"80","/:share":"81","/:v":"82","/:@)":"83","/:jj":"84","/:@@":"85","/:bad":"86","/:lvu":"87","/:no":"88","/:ok":"89","/:love":"90","/:":"91","/:jump":"92","/:shake":"93","/:":"94","/:circle":"95","/:kotow":"96","/:turn":"97","/:skip":"98","/:oY":"99","/:#-0":"100","/:hiphot":"101","/:kiss":"102","/:<&":"103","/:&>":"104"};
-var qqfaceArray=[
-     "/::)",	 //微笑
-     "/::~",	 //撇嘴
-     "/::B",	 //色
-     "/::|",	 //发呆
-     "/:8-)",	 //得意
-     "/::<",	 //流泪
-     "/::$",	 //害羞
-     "/::X",	 //闭嘴
-     "/::Z",	 //睡
-     "/::'(",	 //大哭
-     "/::-|",	 //尴尬
-     "/::@",	 //发怒
-     "/::P",	 //调皮
-     "/::D",	 //呲牙
-     "/::O",	 //惊讶
-     "/::(",	 //难过
-     "/::+",	 //酷
-     "/:--b",	 //冷汗
-     "/::Q",	 //抓狂
-     "/::T",	 //吐
-     "/:,@P",	 //偷笑
-     "/:,@-D",	 //可爱
-     "/::d",	 //白眼
-     "/:,@o",	 //傲慢
-     "/::g",	 //饥饿
-     "/:|-)",	 //困
-     "/::!",	 //惊恐
-     "/::L",	 //流汗
-     "/::>",	 //憨笑
-     "/::,@",	 //大兵
-     "/:,@f",	 //努力
-     "/::-S",	 //咒骂
-     "/:?",	 //疑问
-     "/:,@x",	 //嘘
-     "/:,@@",	 //晕
-     "/::8",	 //折磨
-     "/:,@!",	 //衰
-     "/:!!!",	 //骷髅
-     "/:xx",	 //敲打
-     "/:bye",	 //再见
-     "/:wipe",	 //擦汗
-     "/:dig",	 //抠鼻
-     "/:handclap",	 //鼓掌
-     "/:&-(",	 //溴大了
-     "/:B-)",	 //坏笑
-     "/:<@",	 //左哼哼
-     "/:@>",	 //右哼哼
-     "/::-O",	 //哈欠
-     "/:>-|",	 //鄙视
-     "/:P-(",	 //委屈
-     "/::'|",	 //快哭了
-     "/:X-)",	 //阴险
-     "/::*",	 //亲亲
-     "/:@x",	 //吓
-     "/:8*",	 //可怜
-     "/:pd",	 //菜刀
-     "/:<W>",	 //西瓜
-     "/:beer",	 //啤酒
-     "/:basketb",	 //篮球
-     "/:oo",	 //乒乓
-     "/:coffee",	 //咖啡
-     "/:eat",	 //饭
-     "/:pig",	 //猪头
-     "/:rose",	 //玫瑰
-     "/:fade",	 //凋谢
-     "/:showlove",	 //示爱
-     "/:heart",	 //爱心
-     "/:break",	 //心碎
-     "/:cake",	 //蛋糕
-     "/:li",	 //闪电
-     "/:bome",	 //炸弹
-     "/:kn",	 //刀
-     "/:footb",	 //足球
-     "/:ladybug",	 //瓢虫
-     "/:shit",	 //便便
-     "/:moon",	 //月亮
-     "/:sun",	 //太阳
-     "/:gift",	 //礼物
-     "/:hug",	 //拥抱
-     "/:strong",	 //强
-     "/:weak",	 //弱
-     "/:share",	 //握手
-     "/:v",	 //胜利
-     "/:@)",	 //抱拳
-     "/:jj",	 //勾引
-     "/:@@",	 //拳头
-     "/:bad",	 //差劲
-     "/:lvu",	 //爱你
-     "/:no",	 //No
-     "/:ok",	 //Ok
-     "/:love",	 //爱情
-     "/:<L>",	 //飞吻
-     "/:jump",	 //跳舞
-     "/:shake",	 //发抖
-     "/:<O>",	 //怄火
-     "/:circle",	 //转圈
-     "/:kotow",	 //磕头
-     "/:turn",	 //回头
-     "/:skip",	 //跳绳
-     "/:oY",	 //挥手
-     "/:#-0",	 //激动
-     "/:hiphot",	 //街舞 // hiphot doesnot work!
-     "/:kiss",	 //献吻
-     "/:<&",	 //左太极
-     "/:&>"	 //右太极
-	 ];
 	 
   var ws = new WebSocket('ws://172.110.31.251:9902'); //与远程服务器建立socket连接
-  ws.onmessage = function(evt)    //服务器 通过websocket广播  wss.broadcast(result)广播事件，客户端监听到，vet即为result的内容
-
+  var msglist = document.getElementById('msg');
+  ws.onmessage = function(evt)
   {
-    console.log("evt.data=",evt.data);
-    var msg = JSON.parse(evt.data);          //将数据转为JSON格式
-	console.log("JSON.parse(evt.data)=msg=",msg);
-  
-    msg.user = msg.user || {};
-    var userName = msg.user.nickname;   //获取到用户的昵称
-    var headimg = msg.user.headimgurl;  //获取到用户的人头像
-    var first=document.body.firstChild;
-
-	
-    var oLi = document.createElement('p');
-	
-   
-   
-	if(msg.xml.MsgType[0]==='text'){
-	
-	var content = msg.xml.Content[0];
-	console.log("1111111",content);
-	
-	var isQQface=false;     //用来判断用户发的文字是内容还是图片文字
-	for(var j=0;j<qqfaceArray.length;j++){
-	if(content==qqfaceArray[j]){
-	isQQface=true;}
-	}
-	<!-- var re=/^[\u4E00-\u9FA5\uF900-\uFA2D]*$/; 使用正则表达式，判断内容是中文字符还是图片字符-->
-	   
-	if(!isQQface)
-	
-	 {
-    oLi.innerHTML = '<img src="'+headimg+'" width=32px  >' +userName +  '说:' + content;
-  }
-     else  {
-	 oLi.innerHTML = '<img src="'+headimg+'" width=32px  >' +userName +  '说:'+'<img src="./qqface/'+qqfaceMap[content]+'.png" />';
-	 }
-	}
-	
-	else if (msg.xml.MsgType[0]=== 'image'){
-	var img_url=msg.xml.PicUrl[0];
-	var where="./user_images/"+msg.user.nickname+msg.xml.CreateTime+'.jpg';
-	console.log("where=",where);
-	
-	//设置setTimeout的原因是，服务器存储图片的代码（将用户发的图片存储到服务器本地	re(img_url).pipe(fs.createWriteStream("./client/user_images/"+where));）可能还没完成，
-	//所以，隔一段时间在去调用，保证图片已经下载到服务器本地了。
-	//setTimeout( function(){oLi.innerHTML = '<img src="'+headimg+'" width=32px  >' +userName +  '说:' +  '<img src="'+where+'" width=296px  >';}, 1000*0.5);  
-	oLi.innerHTML = '<img src="'+headimg+'" width=32px  >' +userName +  '说:' +  '<img src="'+where+'" width=296px  >';
-	}
-	
-	else  {
-	 oLi.innerHTML = '<img src="'+headimg+'" width=32px  >' +userName +  '说:' + "xxx";
-	}
-    document.body.insertBefore(oLi,first);
-	
+       console.log(evt.data);
+       var msg = JSON.parse(evt.data);
+       var content = msg.xml.Content[0];
+       msg.user = msg.user || {};
+       var userName = msg.user.nickname;
+       var headimg = msg.user.headimgurl;
+       var item = document.createElement('div');
+       item.className = 'well';
+       item.innerHTML = '<img src="'+headimg+'">' + content;
+       //var oLi = document.createElement('li');
+       //oLi.innerHTML = userName + '<img src="'+headimg+'">' + '说:' + content;
+       msglist.appendChild(item);
   };
 
 
